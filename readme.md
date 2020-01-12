@@ -54,7 +54,7 @@ make install
 ### Compile live Js & Css
 
 ```
-docker-composer exec -u www-data node yarn watch
+docker-composer exec node yarn watch
 ```
 
 ### Links
