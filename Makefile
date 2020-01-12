@@ -16,13 +16,9 @@ down:
 	docker-compose down -v
 
 file-install:
-	EXEC_APACHE cp docker/environment/.env .env
-	EXEC_APACHE cp docker/environment/.env.$(APP_ENV) .env.$(APP_ENV)
-	EXEC_APACHE cp docker/htaccess/.htaccess.$(APP_ENV) public/.htaccess
-
-directory-install:
-	EXEC_APACHE mkdir -p var/cache
-	EXEC_APACHE mkdir -p var/log
+	$(EXEC_APACHE) cp docker/environment/.env .env
+	$(EXEC_APACHE) cp docker/environment/.env.$(APP_ENV) .env.$(APP_ENV)
+	$(EXEC_APACHE) cp docker/htaccess/.htaccess.$(APP_ENV) public/.htaccess
 
 composer-install:
 	$(EXEC_APACHE_COMPOSER) install --no-suggest --no-progress
@@ -56,4 +52,4 @@ yarn-build:
 cache-clear:
 	$(EXEC_APACHE_CONSOLE) cache:clear --env=$(APP_ENV)
 
-install: up file-install directory-install composer-install db-install yarn-install yarn-encore-dev cache-clear
+install: up file-install composer-install db-install yarn-install yarn-encore-dev cache-clear
