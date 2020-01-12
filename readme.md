@@ -59,8 +59,9 @@ docker-composer exec -u www-data node yarn watch
 
 ### Links
 
-| Protocol  | Url                      |
-| --------- | ------------------------ |
-| Apache    | http://localhost         |
-| Mailer    | http://localhost:8025    |
-| PMA       | http://localhost:8081    |
+| Protocol      | Url                      |
+| ------------- | ------------------------ |
+| Apache        | http://localhost         |
+| Apache SSL    | https://localhost        |
+| Mailer        | http://localhost:8025    |
+| PMA           | http://localhost:8081    |
