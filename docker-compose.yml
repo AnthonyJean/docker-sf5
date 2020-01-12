@@ -11,6 +11,8 @@ services:
       - ./docker/mysql:/var/lib/mysql:rw
     ports:
       - 3306:3306
+    networks:
+      - local
 
   phpmyadmin:
     image: phpmyadmin/phpmyadmin
@@ -23,6 +25,8 @@ services:
       - mysql
     ports:
       - 8081:80
+    networks:
+      - local
 
   mailhog:
     image: mailhog/mailhog
@@ -32,6 +36,8 @@ services:
       - ./docker/mailhog/:/maildir:rw
     ports:
       - 8025:8025
+    networks:
+      - local
 
   node:
     image: atecna/node:12-yarn
@@ -39,6 +45,8 @@ services:
       - ./:/var/www/html:rw
     ports:
       - 8888:8888
+    networks:
+      - local
 
   apache:
     image: atecna/php:7.3-apache
@@ -53,3 +61,8 @@ services:
     ports:
       - 80:80
       - 443:443
+    networks:
+      - local
+
+networks:
+  local:
