@@ -1,4 +1,4 @@
-# Docker Symfony 5.0.0 
+# Docker Symfony 5.0.2
 
 ### Requirements
 
