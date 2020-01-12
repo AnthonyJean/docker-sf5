@@ -22,10 +22,9 @@
 
 ```
 make install
-make file-install
-make directory-install
 make up
 make down
+make file-install
 make composer-install
 make db-drop
 make db-create
