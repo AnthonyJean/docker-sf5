@@ -9,18 +9,18 @@ EXEC_APACHE_CONSOLE 	= $(EXEC_APACHE) php bin/console
 
 EXEC_NODE				= docker-compose exec node
 
+file-install:
+	rm -rf .env
+	rm -rf .env.*
+	cp docker/environment/.env .env
+	cp docker/environment/.env.$(APP_ENV) .env.$(APP_ENV)
+	cp docker/htaccess/.htaccess.$(APP_ENV) public/.htaccess
+
 up:
 	docker-compose -f $(APP_COMPOSE) up -d --build
 
 down:
 	docker-compose down -v
-
-file-install:
-	$(EXEC_APACHE) rm .env
-	$(EXEC_APACHE) rm .env.*
-	$(EXEC_APACHE) cp docker/environment/.env .env
-	$(EXEC_APACHE) cp docker/environment/.env.$(APP_ENV) .env.$(APP_ENV)
-	$(EXEC_APACHE) cp docker/htaccess/.htaccess.$(APP_ENV) public/.htaccess
 
 composer-install:
 	$(EXEC_APACHE_COMPOSER) install --no-suggest --no-progress
@@ -54,4 +54,4 @@ yarn-build:
 cache-clear:
 	$(EXEC_APACHE_CONSOLE) cache:clear --env=$(APP_ENV)
 
-install: up file-install composer-install db-install yarn-install yarn-encore-dev cache-clear
+install: file-install up composer-install db-install yarn-install yarn-encore-dev cache-clear
