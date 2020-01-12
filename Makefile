@@ -16,6 +16,8 @@ down:
 	docker-compose down -v
 
 file-install:
+	$(EXEC_APACHE) rm .env
+	$(EXEC_APACHE) rm .env.*
 	$(EXEC_APACHE) cp docker/environment/.env .env
 	$(EXEC_APACHE) cp docker/environment/.env.$(APP_ENV) .env.$(APP_ENV)
 	$(EXEC_APACHE) cp docker/htaccess/.htaccess.$(APP_ENV) public/.htaccess
