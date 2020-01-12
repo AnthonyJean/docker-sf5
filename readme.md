@@ -51,6 +51,10 @@ Install all
 make install
 ```
 
+Nota :
+La base de donnée ne s'installant pas vite sur la premières execution, si une erreur de connexion
+apparait, relance la commande.
+
 ### Compile live Js & Css
 
 ```
