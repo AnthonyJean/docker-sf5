@@ -1,0 +1,55 @@
+version: '3.7'
+
+services:
+
+  mysql:
+    image: mysql:5.7
+    command: --default-authentication-plugin=mysql_native_password
+    environment:
+      MYSQL_ROOT_PASSWORD: password
+    volumes:
+      - ./docker/mysql:/var/lib/mysql:rw
+    ports:
+      - 3306:3306
+
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin
+    environment:
+      PMA_HOST: mysql
+      PMA_PORT: 3306
+    links:
+      - mysql
+    depends_on:
+      - mysql
+    ports:
+      - 8081:80
+
+  mailhog:
+    image: mailhog/mailhog
+    environment:
+      - MH_STORAGE=maildir
+    volumes:
+      - ./docker/mailhog/:/maildir:rw
+    ports:
+      - 8025:8025
+
+  node:
+    image: atecna/node:12-yarn
+    volumes:
+      - ./:/var/www/html:rw
+    ports:
+      - 8888:8888
+
+  apache:
+    image: atecna/php:7.3-apache
+    depends_on:
+      - mysql
+    links:
+      - mysql
+    volumes:
+      - ./docker/apache/ports.conf:/etc/apache2/ports.conf
+      - ./docker/apache/sites-available:/etc/apache2/sites-available
+      - ./:/var/www/html:rw
+    ports:
+      - 80:80
+      - 443:443
