@@ -57,6 +57,12 @@ make install
 docker-composer exec node yarn watch
 ```
 
+### Use bin/console
+
+```
+docker-composer exec apache bin/console
+```
+
 ### Links
 
 | Protocol      | Url                      |
