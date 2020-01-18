@@ -39,14 +39,6 @@ make yarn-build
 
 ### Install
 
-Disable chmod for git
-
-```
-git config core.fileMode false
-```
-
-Install all
-
 ```
 make install
 ```
